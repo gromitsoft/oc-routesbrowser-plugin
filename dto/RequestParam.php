@@ -1,6 +1,6 @@
 <?php
 
-namespace Gromit\RoutesBrowser\Dto;
+namespace GromIT\RoutesBrowser\Dto;
 
 class RequestParam
 {

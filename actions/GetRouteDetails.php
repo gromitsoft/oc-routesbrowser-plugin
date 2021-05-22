@@ -3,10 +3,10 @@
 namespace GromIT\RoutesBrowser\Actions;
 
 use Closure;
-use Gromit\RoutesBrowser\Dto\RequestParam;
-use Gromit\RoutesBrowser\Dto\RouteDetails;
-use Gromit\RoutesBrowser\Dto\RouteParam;
-use Illuminate\Foundation\Http\FormRequest;
+use GromIT\RoutesBrowser\Dto\RequestParam;
+use GromIT\RoutesBrowser\Dto\RouteDetails;
+use GromIT\RoutesBrowser\Dto\RouteParam;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Arr;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
@@ -49,7 +49,7 @@ class GetRouteDetails
      * @param \Illuminate\Routing\Route $route
      * @param string                    $method
      *
-     * @return \Gromit\RoutesBrowser\Dto\RouteDetails
+     * @return \GromIT\RoutesBrowser\Dto\RouteDetails
      * @throws \ReflectionException
      */
     public function execute(Route $route, string $method): RouteDetails
@@ -217,7 +217,7 @@ class GetRouteDetails
 
             if ($type
                 && $type instanceof ReflectionNamedType
-                && is_subclass_of($type->getName(), FormRequest::class)
+                && is_subclass_of($type->getName(), Request::class)
             ) {
                 return $type->getName();
             }
@@ -236,7 +236,7 @@ class GetRouteDetails
         $uses = Arr::get($this->action, 'uses');
 
         if ($uses instanceof Closure) {
-            $this->actionReflection = new ReflectionFunction($uses);;
+            $this->actionReflection = new ReflectionFunction($uses);
             return;
         }
 

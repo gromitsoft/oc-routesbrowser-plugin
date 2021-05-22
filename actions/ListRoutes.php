@@ -19,7 +19,7 @@ class ListRoutes
     }
 
     /**
-     * @return \Illuminate\Support\Collection|\Gromit\RoutesBrowser\Dto\RouteDetails[]
+     * @return \Illuminate\Support\Collection|\GromIT\RoutesBrowser\Dto\RouteDetails[]
      */
     public function execute(): Collection
     {

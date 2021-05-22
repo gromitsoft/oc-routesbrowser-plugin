@@ -1,6 +1,6 @@
 <?php
 
-namespace Gromit\RoutesBrowser\Dto;
+namespace GromIT\RoutesBrowser\Dto;
 
 class RouteDetails
 {
@@ -30,12 +30,12 @@ class RouteDetails
     public $description;
 
     /**
-     * @var \Gromit\RoutesBrowser\Dto\RouteParam[]
+     * @var \GromIT\RoutesBrowser\Dto\RouteParam[]
      */
     public $routeParams = [];
 
     /**
-     * @var \Gromit\RoutesBrowser\Dto\RequestParam[]
+     * @var \GromIT\RoutesBrowser\Dto\RequestParam[]
      */
     public $requestParams = [];
 
