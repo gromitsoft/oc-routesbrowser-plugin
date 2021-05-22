@@ -1,0 +1,27 @@
+<?php
+/**
+ * @var string $method
+ */
+
+switch ($method) {
+    case 'GET':
+        $bg = '#86cb43';
+        break;
+    case 'POST':
+        $bg = '#8284f8';
+        break;
+    case 'PUT':
+    case 'PATCH':
+        $bg = '#f0ad4e';
+        break;
+    case 'DELETE':
+        $bg = '#ff3e1d';
+        break;
+    default:
+        $bg = '#eeeff0';
+        break;
+}
+?>
+<span class="http-method" style="background-color: <?= $bg ?>">
+    <?= $method ?>
+</span>

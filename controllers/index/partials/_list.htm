@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var \Gromit\RoutesBrowser\Dto\RouteDetails[] $routes
+ */
+?>
+<div class="control-list" data-control="listwidget">
+    <table class="table data m-b-0" data-control="rowlink" id="routes-list">
+        <?php foreach ($routes as $route): ?>
+            <tr>
+                <td>
+                    <?= $this->makePartial('partials/method', [
+                            'method' => $route->method
+                    ]) ?>
+                    <span class="route-uri">
+                        <?= $route->uri ?>
+                    </span>
+                    <a href="#" onclick="openRoute(
+                            '<?= $route->method, ' ', Str::limit($route->uri, 20) ?>',
+                            '<?= $route->method ?>',
+                            '<?= $route->uri ?>')"></a>
+                    <?php if ($route->description): ?>
+                        <div class="text-muted route-description"
+                             data-text="<?= e($route->description) ?>">
+                            <?= Str::limit($route->description, 60) ?>
+                        </div>
+                    <?php endif ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </table>
+</div>

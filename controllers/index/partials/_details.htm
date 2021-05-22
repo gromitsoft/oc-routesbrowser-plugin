@@ -1,0 +1,41 @@
+<?php
+/**
+ * @var \GromIT\RoutesBrowser\Controllers\Index $this
+ * @var \Gromit\RoutesBrowser\Dto\RouteDetails  $details
+ */
+
+$randomId = Str::random();
+?>
+<div class="flex-layout-row f-grow h100p">
+    <div class="w50p" style="border-right: 1px solid #ddd;">
+        <div class="control-scrollbar" data-control="scrollbar">
+            <div class="padded-container">
+                <div class="m-b">
+                    <?= $this->makePartial('partials/details_header') ?>
+                </div>
+                <?php if ($details && $details->description): ?>
+                    <div class="m-b"><?= $details->description ?></div>
+                <?php endif ?>
+            </div>
+            <form onsubmit="sendRequest('<?= $details->method ?>'.toLowerCase(), '/<?= $details->uri ?>', '<?= $randomId ?>'); return false;">
+                <div class="p-l p-r">
+                    <?= $this->makePartial('partials/toolbar') ?>
+                </div>
+                <?php if ($details): ?>
+                    <?= $this->makePartial('partials/params/route_params') ?>
+                    <?= $this->makePartial('partials/params/request_params') ?>
+                    <?= $this->makePartial('partials/params/headers') ?>
+                <?php endif ?>
+            </form>
+        </div>
+    </div>
+    <div class="flex-layout-column w50p">
+        <div id="<?= $randomId ?>" class="response-viewer flex-layout-column f-grow justify-center">
+            <div class="loading-indicator-container" style="display: none">
+                <div class="loading-indicator indicator-center">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

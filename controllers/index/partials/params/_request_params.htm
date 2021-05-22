@@ -1,0 +1,42 @@
+<?php
+/**
+ * @var \Gromit\RoutesBrowser\Dto\RouteDetails $details
+ */
+?>
+<table class="table data params-table">
+    <tr>
+        <td colspan="2">
+            <strong>Request params</strong>
+        </td>
+        <td class="column-button">
+            <button class="btn btn-sm btn-secondary pull-right"
+                    type="button"
+                    data-request="onAjax"
+                    data-request-update="'partials/params/param_row': '@#details-tabs > .tab-content > .tab-pane.active .params-table'">
+                <i class="icon-plus"></i>
+            </button>
+        </td>
+    </tr>
+    <?php foreach ($details->requestParams as $param): ?>
+        <tr>
+            <td class="w-300">
+                <?php if (Request::secure()): ?>
+                    <i class="icon-copy"
+                       style="cursor: pointer; margin-right: 10px"
+                       onclick="copyTextToClipboard('<?= $param->name ?>', 'Copied to clipboard!')"
+                    ></i>
+                <?php endif ?>
+                <strong><?= $param->name ?></strong>: <em><?= $param->type ?></em>
+                <input type="hidden" class="param-name" value="<?= $param->name ?>">
+            </td>
+            <td class="column-button w-200">
+                <input class="form-control input-sm param-value"
+                        <?php if (!request()->ajax()): ?>
+                            value="<?= get('request.' . $param->name) ?>"
+                        <?php endif ?>
+                       placeholder="<?= $param->name ?>"/>
+            </td>
+            <td><?= $param->description ?></td>
+        </tr>
+    <?php endforeach ?>
+</table>

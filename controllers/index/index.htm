@@ -1,0 +1,57 @@
+<?php
+/**
+ * @var \GromIT\RoutesBrowser\Controllers\Index     $this
+ * @var \Gromit\RoutesBrowser\Dto\RouteDetails|null $details
+ */
+?>
+<div class="flex-layout-row h100p">
+    <div class="control-scrollpanel" id="route-list-container"
+         style="min-width: 500px;">
+        <div class="layout-relative">
+            <div class="layout-absolute">
+                <div class="control-scrollbar" data-control="scrollbar">
+                    <div class="form-group span-full p-a flex-layout-row">
+                        <input class="form-control input-sm"
+                               id="routes-filter"
+                               autofocus
+                               placeholder="Search..."
+                               value="<?= get('search') ?>"/>
+                        <button class="btn btn-sm btn-default ml5" id="clear-search" type="button" disabled>
+                            <i class="icon-remove"></i>
+                        </button>
+                        <button class="btn btn-sm btn-secondary ml5" id="collapse-list" type="button"
+                                onclick="collapseList()">
+                            <i class="icon-arrow-circle-o-left"></i>
+                        </button>
+                    </div>
+                    <?= $this->makePartial('partials/list') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-50" id="routes-list-placeholder"
+         style="display: none; border-right: 1px solid #ddd;">
+        <button class="btn btn-secondary" id="show-list"
+                onclick="showList()">
+            <i class="icon-arrow-circle-o-right"></i>
+        </button>
+    </div>
+    <div class="flex-layout-column f-grow">
+        <div class="control-tabs content-tabs flex-layout-column f-grow" id="details-tabs"
+             data-control="tab" data-closable
+             data-pane-classes="flex-layout-column custom-full-height f-grow bg-white">
+            <ul class="nav nav-tabs">
+                <?php if ($details): ?>
+                    <li class="active"><a href="#contentTabOne"><?= $details->method ?> <?= $details->uri ?></a></li>
+                <?php endif ?>
+            </ul>
+            <div class="tab-content f-grow">
+                <?php if ($details): ?>
+                    <div class="tab-pane active custom-full-height bg-white">
+                        <?= $this->makePartial('partials/details') ?>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>

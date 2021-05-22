@@ -1,0 +1,15 @@
+{
+    "name": "gromit/oc-routesbrowser-plugin",
+    "type": "october-plugin",
+    "description": "OctoberCMS plugin for test routes in backend",
+    "authors": [
+        {
+            "name": "Sergey Kasyanov",
+            "email": "serega.kasyanow@yandex.ru"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0",
+        "phpdocumentor/reflection-docblock": "~5.2"
+    }
+}

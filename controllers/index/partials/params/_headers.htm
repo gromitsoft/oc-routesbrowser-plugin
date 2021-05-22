@@ -1,0 +1,36 @@
+<?php
+/**
+ * @var \GromIT\RoutesBrowser\Controllers\Index $this
+ * @var array                                   $headers
+ */
+?>
+<table class="table data headers-table">
+    <tr>
+        <td colspan="2">
+            <strong>Headers</strong>
+        </td>
+        <td class="column-button">
+            <button class="btn btn-sm btn-secondary pull-right"
+                    type="button"
+                    data-request="onAjax"
+                    data-request-update="'partials/params/param_row': '@#details-tabs > .tab-content > .tab-pane.active .headers-table'">
+                <i class="icon-plus"></i>
+            </button>
+        </td>
+    </tr>
+    <?php foreach ($headers as $name => $value): ?>
+        <tr>
+            <td class="column-button w-300">
+                <input class="form-control input-sm param-name" placeholder="Name" value="<?= $name ?>"/>
+            </td>
+            <td class="column-button w-200">
+                <input class="form-control input-sm param-value" placeholder="Value" value="<?= $value ?>"/>
+            </td>
+            <td class="column-button">
+                <button class="btn btn-sm btn-secondary" onclick="this.parentNode.parentNode.remove()">
+                    <i class="icon-minus"></i>
+                </button>
+            </td>
+        </tr>
+    <?php endforeach ?>
+</table>

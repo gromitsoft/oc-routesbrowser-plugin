@@ -1,0 +1,34 @@
+<?php
+/**
+ * @var \Gromit\RoutesBrowser\Dto\RouteDetails $details
+ */
+?>
+<?php if ($details->routeParams): ?>
+    <table class="table data route-params-table">
+        <tr>
+            <td colspan="3"><strong>Route params</strong></td>
+        </tr>
+        <?php foreach ($details->routeParams as $param): ?>
+            <tr>
+                <td class="w-300">
+                    <?php if (Request::secure()): ?>
+                        <i class="icon-copy"
+                           style="cursor: pointer; margin-right: 10px"
+                           onclick="copyTextToClipboard('<?= $param->name ?>', 'Copied to clipboard!')"
+                        ></i>
+                    <?php endif ?>
+                    <strong><?= $param->name ?></strong><?= $param->type ? '<em>: ' . $param->type . '</em>' : '' ?>
+                    <input type="hidden" class="param-name" value="<?= $param->name ?>">
+                </td>
+                <td class="column-button w-200">
+                    <input class="form-control input-sm param-value"
+                            <?php if (!request()->ajax()): ?>
+                                value="<?= get('route.' . $param->name) ?>"
+                            <?php endif ?>
+                           placeholder="<?= $param->name ?>"/>
+                </td>
+                <td><?= $param->description ?></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
+<?php endif ?>

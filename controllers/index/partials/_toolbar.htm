@@ -1,0 +1,22 @@
+<?php
+/**
+ * @var \Gromit\RoutesBrowser\Dto\RouteDetails $details
+ */
+?>
+<div class="btn-toolbar m-b" data-control="toolbar">
+    <button class="btn btn-sm btn-default oc-icon-send" type="submit">
+        Send request
+    </button>
+    <?php if (Request::secure()): ?>
+        <button class="btn btn-sm btn-secondary oc-icon-copy"
+                type="button"
+                onclick="copyTextToClipboard('<?= $details->uri ?>', 'URI copied to clipboard!')">
+            Copy URI to clipboard
+        </button>
+    <?php endif ?>
+    <button type="button"
+            class="btn btn-sm btn-secondary oc-icon-copy"
+            onclick="copyLinkToRoute('<?= $details->method ?>'.toLowerCase(), '<?= $details->uri ?>')">
+        Copy link to this route
+    </button>
+</div>

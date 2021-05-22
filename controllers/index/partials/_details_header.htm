@@ -1,0 +1,36 @@
+<?php
+/**
+ * @var \GromIT\RoutesBrowser\Controllers\Index $this
+ * @var \Gromit\RoutesBrowser\Dto\RouteDetails  $details
+ */
+?>
+<div class="h4">
+    <?= $this->makePartial('partials/method', [
+            'method' => $details->method
+    ]) ?>
+    <?= $details->uri ?>
+    <span style="padding-left: 10px; cursor: pointer"
+          data-control="popover"
+          data-width="550"
+          data-placement="bottom"
+          data-content-from="#details-tabs > .tab-content > .tab-pane.active .route-info">
+        <i class="oc-icon-info-circle"></i>
+    </span>
+    <div class="response-code small text-muted pull-right"></div>
+</div>
+<script type="text/template" class="route-info">
+    <div class="popover-body">
+        <table>
+            <tr>
+                <td style="padding: 2px 4px;"><small class="text-muted">Handler:</small></td>
+                <td style="padding: 2px 4px;"><small> <?= $details->action ?></small></td>
+            </tr>
+            <?php if ($details->requestClass): ?>
+                <tr>
+                    <td style="padding: 2px 4px;"><small class="text-muted">Request class:</small></td>
+                    <td style="padding: 2px 4px;"><small> <?= $details->requestClass ?></small></td>
+                </tr>
+            <?php endif ?>
+        </table>
+    </div>
+</script>
