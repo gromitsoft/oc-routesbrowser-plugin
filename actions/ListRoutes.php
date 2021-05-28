@@ -54,7 +54,8 @@ class ListRoutes
             'backend',
             'combine',
             'resize',
-            '{slug?}'
+            '{slug?}',
+            '{slug}'
         ]);
     }
 
