@@ -10,6 +10,8 @@ use GromIT\RoutesBrowser\Actions\ListRoutes;
 
 class Index extends Controller
 {
+    protected $requiredPermissions = ['gromit.routesbrowser.view'];
+
     /**
      * @var \GromIT\RoutesBrowser\Actions\ListRoutes
      */

@@ -20,6 +20,16 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerPermissions(): array
+    {
+        return [
+            'gromit.routesbrowser.view' => [
+                'label' => 'View routes',
+                'tab'   => 'RoutesBrowser',
+            ]
+        ];
+    }
+
     /**
      * Registers back-end navigation items for this plugin.
      *
@@ -29,10 +39,10 @@ class Plugin extends PluginBase
     {
         return [
             'routes' => [
-                'label'       => 'Routes',
-                'url'         => Backend::url('gromit/routesbrowser'),
-                'icon'        => 'icon-book',
-                'order'       => 500,
+                'label' => 'Routes',
+                'url'   => Backend::url('gromit/routesbrowser'),
+                'icon'  => 'icon-book',
+                'order' => 500,
             ],
         ];
     }
