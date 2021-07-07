@@ -39,10 +39,11 @@ class Plugin extends PluginBase
     {
         return [
             'routes' => [
-                'label' => 'Routes',
-                'url'   => Backend::url('gromit/routesbrowser'),
-                'icon'  => 'icon-book',
-                'order' => 500,
+                'label'       => 'Routes',
+                'url'         => Backend::url('gromit/routesbrowser'),
+                'icon'        => 'icon-book',
+                'order'       => 500,
+                'permissions' => ['gromit.routesbrowser.view']
             ],
         ];
     }

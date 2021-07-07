@@ -66,7 +66,7 @@ class Index extends Controller
         $this->vars['routes'] = $this->getRoutes->execute();
 
         if (!request()->ajax() && get('method') && get('uri')) {
-            $this->prepareVars(strtoupper(get('method')), urldecode(post('uri')));
+            $this->prepareVars(strtoupper(get('method')), urldecode(get('uri')));
         } else {
             $this->vars['details'] = null;
         }
