@@ -109,14 +109,15 @@ function sendRequest(method, uri, responseViewerId) {
 function prepareUri(uri, routeParams) {
     for (let paramName in routeParams) {
         if (routeParams.hasOwnProperty(paramName)) {
-            uri = uri.split(paramName).join(routeParams[paramName]);
+            //uri = uri.split(paramName).join(routeParams[paramName]);
+            uri = uri.replace(`{${paramName}}`, routeParams[paramName]);
         }
     }
 
-    return uri
-        .split('{').join('')
-        .split('?}').join('')
-        .split('}').join('');
+    return uri;
+        //.split('{').join('')
+        //.split('?}').join('')
+        //.split('}').join('');
 }
 
 
