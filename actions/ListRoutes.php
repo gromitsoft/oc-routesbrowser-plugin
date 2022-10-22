@@ -51,7 +51,7 @@ class ListRoutes
     private function isSystemRoute(Route $route): bool
     {
         return Str::startsWith($route->uri(), [
-            str_replace('/','',Config::get('backend.uri')),
+            str_after(Config::get('backend.uri'),'/'),
             'combine',
             'resize',
             '{slug?}',
