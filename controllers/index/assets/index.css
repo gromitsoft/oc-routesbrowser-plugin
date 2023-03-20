@@ -26,6 +26,10 @@
     height: 100% !important;
 }
 
+.w-50 {
+    width: 50px !important;
+}
+
 .w50p {
     width: 50% !important;
 }

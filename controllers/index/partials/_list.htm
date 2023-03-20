@@ -4,12 +4,12 @@
  */
 ?>
 <div class="control-list" data-control="listwidget">
-    <table class="table data m-b-0" data-control="rowlink" id="routes-list">
+    <table class="table data" data-control="rowlink" id="routes-list">
         <?php foreach ($routes as $route): ?>
             <tr>
                 <td>
                     <?= $this->makePartial('partials/method', [
-                            'method' => $route->method
+                        'method' => $route->method
                     ]) ?>
                     <span class="route-uri">
                         <?= $route->uri ?>

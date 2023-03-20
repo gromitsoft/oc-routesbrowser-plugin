@@ -5,11 +5,6 @@ use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
-    /**
-     * Returns information about this plugin.
-     *
-     * @return array
-     */
     public function pluginDetails(): array
     {
         return [
@@ -30,11 +25,6 @@ class Plugin extends PluginBase
         ];
     }
 
-    /**
-     * Registers back-end navigation items for this plugin.
-     *
-     * @return array
-     */
     public function registerNavigation(): array
     {
         return [

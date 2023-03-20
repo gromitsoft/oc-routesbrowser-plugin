@@ -10,17 +10,13 @@ $randomId = Str::random();
     <div class="w50p" style="border-right: 1px solid #ddd;">
         <div class="control-scrollbar" data-control="scrollbar">
             <div class="padded-container">
-                <div class="m-b">
-                    <?= $this->makePartial('partials/details_header') ?>
-                </div>
+                <?= $this->makePartial('partials/details_header') ?>
                 <?php if ($details && $details->description): ?>
-                    <div class="m-b"><?= $details->description ?></div>
+                    <div><?= $details->description ?></div>
                 <?php endif ?>
             </div>
             <form onsubmit="sendRequest('<?= $details->method ?>'.toLowerCase(), '/<?= $details->uri ?>', '<?= $randomId ?>'); return false;">
-                <div class="p-l p-r">
-                    <?= $this->makePartial('partials/toolbar') ?>
-                </div>
+                <?= $this->makePartial('partials/toolbar') ?>
                 <?php if ($details): ?>
                     <?= $this->makePartial('partials/params/route_params') ?>
                     <?= $this->makePartial('partials/params/request_params') ?>

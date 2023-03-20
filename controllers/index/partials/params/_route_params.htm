@@ -21,7 +21,7 @@
                     <input type="hidden" class="param-name" value="<?= $param->name ?>">
                 </td>
                 <td class="column-button w-200">
-                    <input class="form-control input-sm param-value"
+                    <input class="form-control form-control-sm param-value"
                             <?php if (!request()->ajax()): ?>
                                 value="<?= get('route.' . $param->name) ?>"
                             <?php endif ?>
