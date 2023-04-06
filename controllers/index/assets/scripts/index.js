@@ -1,6 +1,6 @@
 let editors = {};
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('page:loaded', function () {
     $('#details-tabs').on('beforeClose.oc.tab', function (event) {
         let id = $(event.relatedTarget).find('.response-viewer').attr('id');
 
@@ -32,19 +32,24 @@ function getRouteParams() {
 }
 
 function getRequestParams() {
-    let requestParams = {};
+    let requestParams = new FormData();
 
     getActiveDetailsTab()
         .querySelectorAll('.params-table tr')
         .forEach(function (tr) {
             let nameInput = tr.querySelector('input.param-name');
-
             if (!nameInput) {
                 return;
             }
 
             if (nameInput.value.length > 0) {
-                requestParams[nameInput.value] = tr.querySelector('input.param-value').value;
+                let input = tr.querySelector('input.param-value');
+
+                if (input.getAttribute('type') === 'file') {
+                    requestParams.append(nameInput.value, input.files[0]);
+                } else {
+                    requestParams.append(nameInput.value, input.value);
+                }
             }
         });
 
@@ -109,15 +114,12 @@ function sendRequest(method, uri, responseViewerId) {
 function prepareUri(uri, routeParams) {
     for (let paramName in routeParams) {
         if (routeParams.hasOwnProperty(paramName)) {
-            //uri = uri.split(paramName).join(routeParams[paramName]);
+            uri = uri.replace(`{${paramName}?}`, routeParams[paramName]);
             uri = uri.replace(`{${paramName}}`, routeParams[paramName]);
         }
     }
 
     return uri;
-        //.split('{').join('')
-        //.split('?}').join('')
-        //.split('}').join('');
 }
 
 
@@ -197,6 +199,7 @@ function renderResponse(res, responseViewerId) {
         if (mode) {
             editor.session.setMode('ace/mode/' + mode);
         }
+        editor.setTheme('ace/theme/tomorrow_night_eighties');
         editor.setReadOnly(true);
         editor.setValue(JSON.stringify(res.data, null, 4), -1);
 

@@ -6,20 +6,27 @@
 ?>
 <div class="flex-layout-row h100p">
     <div class="control-scrollpanel" id="route-list-container"
-         style="min-width: 500px;">
+         style="min-width: 400px;">
         <div class="layout-relative">
             <div class="layout-absolute">
                 <div class="control-scrollbar" data-control="scrollbar">
-                    <div class="form-group span-full p-3 flex-layout-row">
+                    <div class="form-group span-full p-3 flex-layout-row gap-2">
                         <input class="form-control form-control-sm"
                                id="routes-filter"
                                autofocus
                                placeholder="Search..."
                                value="<?= get('search') ?>"/>
-                        <button class="btn btn-sm btn-default ml5" id="clear-search" type="button" disabled>
+                        <button class="btn btn-sm btn-default" id="clear-search" type="button" disabled>
                             <i class="icon-remove"></i>
                         </button>
-                        <button class="btn btn-sm btn-secondary ml5" id="collapse-list" type="button"
+                        <div class="dropdown dropdonw-fixed">
+                            <a href="#" data-toggle="dropdown" class="btn btn-sm btn-default"><i class="icon-download"></i></a>
+
+                            <ul class="dropdown-menu" role="menu" data-dropdown-title="Export Routes">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= $this->actionUrl('thunder') ?>" class="oc-icon-download">Thunder Client</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-sm btn-secondary" id="collapse-list" type="button"
                                 onclick="collapseList()">
                             <i class="icon-arrow-circle-o-left"></i>
                         </button>
@@ -30,8 +37,8 @@
         </div>
     </div>
     <div class="w-50" id="routes-list-placeholder"
-         style="display: none; border-right: 1px solid #ddd;">
-        <button class="btn btn-secondary" id="show-list"
+         style="display: none;">
+        <button class="btn btn-dark" id="show-list"
                 onclick="showList()">
             <i class="icon-arrow-circle-o-right"></i>
         </button>
@@ -39,7 +46,7 @@
     <div class="flex-layout-column f-grow">
         <div class="control-tabs content-tabs flex-layout-column f-grow" id="details-tabs"
              data-control="tab" data-closable
-             data-pane-classes="flex-layout-column custom-full-height f-grow bg-white">
+             data-pane-classes="flex-layout-column custom-full-height f-grow">
             <ul class="nav nav-tabs">
                 <?php if ($details): ?>
                     <li class="active"><a href="#contentTabOne"><?= $details->method ?> <?= $details->uri ?></a></li>
@@ -47,7 +54,7 @@
             </ul>
             <div class="tab-content f-grow">
                 <?php if ($details): ?>
-                    <div class="tab-pane active custom-full-height bg-white">
+                    <div class="tab-pane active custom-full-height">
                         <?= $this->makePartial('partials/details') ?>
                     </div>
                 <?php endif ?>

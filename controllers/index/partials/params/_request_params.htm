@@ -19,7 +19,7 @@
     </tr>
     <?php foreach ($details->requestParams as $param): ?>
         <tr>
-            <td class="w-300">
+            <td>
                 <?php if (Request::secure()): ?>
                     <i class="icon-copy"
                        style="cursor: pointer; margin-right: 10px"
@@ -29,14 +29,32 @@
                 <strong><?= $param->name ?></strong>: <em><?= $param->type ?></em>
                 <input type="hidden" class="param-name" value="<?= $param->name ?>">
             </td>
-            <td class="column-button w-200">
+            <td class="column-button">
                 <input class="form-control form-control-sm param-value"
-                        <?php if (!request()->ajax()): ?>
-                            value="<?= get('request.' . $param->name) ?>"
-                        <?php endif ?>
-                       placeholder="<?= $param->name ?>"/>
+                    <?php if (\Str::contains(strtolower($param->type), 'file')): ?>
+                        type="file"
+                    <?php endif ?>
+                    <?php if (!request()->ajax()): ?>
+                        value="<?= get('request.' . $param->name) ?>"
+                    <?php endif ?>
+                    placeholder="<?= $param->name ?>"
+                />
             </td>
-            <td><?= $param->description ?></td>
+            <td>
+                <?php if (mb_strlen($param->description) > 0): ?>
+                    <?php $id = \Str::random() ?>
+                    <i class="icon-info-circle"
+                        style="cursor: pointer"
+                        data-control="popover"
+                        data-placement="bottom"
+                        data-content-from="#<?= $id ?>"></i>
+                    <script type="text/template" id="<?= $id ?>">
+                        <div class="popover-body">
+                            <?= $param->description ?>
+                        </div>
+                    </script>
+                <?php endif ?>
+            </td>
         </tr>
     <?php endforeach ?>
 </table>

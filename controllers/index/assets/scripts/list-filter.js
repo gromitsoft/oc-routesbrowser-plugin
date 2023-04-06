@@ -2,7 +2,7 @@ let listElem;
 let clearSearchBtn;
 let filterInput;
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('page:loaded', function () {
     listElem = document.querySelector('#routes-list');
     clearSearchBtn = document.querySelector('#clear-search');
     filterInput = document.querySelector('#routes-filter');

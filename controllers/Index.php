@@ -4,9 +4,11 @@ namespace GromIT\RoutesBrowser\Controllers;
 
 use Backend\Classes\Controller;
 use Backend\Facades\BackendMenu;
+use GromIT\RoutesBrowser\Actions\Export\GenerateThunderCollection;
 use GromIT\RoutesBrowser\Actions\FindRoute;
 use GromIT\RoutesBrowser\Actions\GetRouteDetails;
 use GromIT\RoutesBrowser\Actions\ListRoutes;
+use Response;
 
 class Index extends Controller
 {
@@ -27,19 +29,25 @@ class Index extends Controller
      */
     private $getRouteDetails;
 
+    /**
+     * @var \GromIT\RoutesBrowser\Actions\Export\GenerateThunderCollection
+     */
+    private $generateThunderCollection;
+
     public function __construct(
         ListRoutes $getRoutes,
         FindRoute $findRoute,
-        GetRouteDetails $getRouteDetails
-    )
-    {
+        GetRouteDetails $getRouteDetails,
+        GenerateThunderCollection $generateThunderCollection
+    ) {
         parent::__construct();
 
         BackendMenu::setContext('GromIT.RoutesBrowser', 'routes');
 
-        $this->getRoutes       = $getRoutes;
-        $this->findRoute       = $findRoute;
-        $this->getRouteDetails = $getRouteDetails;
+        $this->getRoutes                 = $getRoutes;
+        $this->findRoute                 = $findRoute;
+        $this->getRouteDetails           = $getRouteDetails;
+        $this->generateThunderCollection = $generateThunderCollection;
     }
 
     /**
@@ -54,6 +62,7 @@ class Index extends Controller
         $this->addCss('/plugins/gromit/routesbrowser/controllers/index/assets/index.css');
         $this->addJs('/plugins/gromit/routesbrowser/controllers/index/assets/scripts/axios.min.js');
         $this->addJs('/modules/backend/formwidgets/codeeditor/assets/js/build-min.js');
+        $this->addJs('/modules/backend/formwidgets/codeeditor/assets/vendor/ace/theme-tomorrow_night_eighties.js');
 
         $this->addJs('/plugins/gromit/routesbrowser/controllers/index/assets/scripts/list-filter.js');
         $this->addJs('/plugins/gromit/routesbrowser/controllers/index/assets/scripts/http-codes.js');
@@ -99,5 +108,17 @@ class Index extends Controller
         } else {
             $this->vars['headers'] = [];
         }
+    }
+
+    public function thunder()
+    {
+        $filename = 'thunder-collection_' . \Str::slug(config('app.name')) . '.json';
+
+        return Response::streamDownload(function () {
+            echo $this->generateThunderCollection->execute();
+        }, $filename, [
+            'Content-type'        => 'application/json',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
     }
 }

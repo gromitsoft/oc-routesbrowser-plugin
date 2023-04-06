@@ -19,6 +19,5 @@ function showList() {
 }
 
 function updateParamsScroll() {
-    // $('[data-control="scrollbar"]').each((_, elem) => $(elem).trigger('oc.scrollbar.gotoStart'));
     $(window).trigger('oc.updateUi');
 }
