@@ -32,6 +32,26 @@ function getRouteParams() {
 }
 
 function getRequestParams() {
+    let requestParams = {};
+
+    getActiveDetailsTab()
+        .querySelectorAll('.params-table tr')
+        .forEach(function (tr) {
+            let nameInput = tr.querySelector('input.param-name');
+
+            if (!nameInput) {
+                return;
+            }
+
+            if (nameInput.value.length > 0) {
+                requestParams[nameInput.value] = tr.querySelector('input.param-value').value;
+            }
+        });
+
+    return requestParams;
+}
+
+function getFormData() {
     let requestParams = new FormData();
 
     getActiveDetailsTab()
@@ -80,7 +100,6 @@ function sendRequest(method, uri, responseViewerId) {
     showResponseLoader();
 
     let routeParams = getRouteParams();
-    let requestParams = getRequestParams();
 
     uri = prepareUri(uri, routeParams);
 
@@ -94,10 +113,10 @@ function sendRequest(method, uri, responseViewerId) {
         axiosParams.headers = headers;
     }
 
-    if (method === 'get' && Object.keys(requestParams).length > 0) {
-        uri += '?' + buildQueryString(requestParams);
+    if (method === 'get') {
+        uri += '?' + buildQueryString(getRequestParams());
     } else {
-        axiosParams.data = requestParams;
+        axiosParams.data = getFormData();
     }
 
     axiosParams.url = uri;
