@@ -7,3 +7,4 @@
 1.0.7: Fix UI for October v3.x
 1.1.0: Export to thunder client
 1.1.1: Fix request params
+1.1.2: Fix request sending. Small ui fix

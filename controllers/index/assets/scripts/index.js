@@ -115,8 +115,10 @@ function sendRequest(method, uri, responseViewerId) {
 
     if (method === 'get') {
         uri += '?' + buildQueryString(getRequestParams());
-    } else {
+    } else if (method === 'post') {
         axiosParams.data = getFormData();
+    } else {
+        axiosParams.data = getRequestParams();
     }
 
     axiosParams.url = uri;

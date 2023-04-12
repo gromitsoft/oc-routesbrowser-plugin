@@ -56,7 +56,7 @@
 }
 
 .custom-full-height {
-    height: calc(100vh - 111px);
+    height: 100%;
 }
 
 #show-list {
