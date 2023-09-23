@@ -8,3 +8,4 @@
 1.1.0: Export to thunder client
 1.1.1: Fix request params
 1.1.2: Fix request sending. Small ui fix
+1.1.3: Fix for optimized routes

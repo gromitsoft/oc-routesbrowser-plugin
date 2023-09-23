@@ -9,6 +9,7 @@ use GromIT\RoutesBrowser\Dto\RouteParam;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use phpDocumentor\Reflection\DocBlock\Tags\Param;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use phpDocumentor\Reflection\DocBlock\Tags\PropertyRead;
@@ -63,7 +64,7 @@ class GetRouteDetails
 
         $this->loadAction();
 
-        if ($this->action === null) {
+        if ($this->action === null || $this->actionReflection === null) {
             return new RouteDetails($routeDetailsData);
         }
 
@@ -240,7 +241,14 @@ class GetRouteDetails
             return;
         }
 
-        if (is_string($uses)) {
+        if (is_string($uses) && Str::contains($uses, 'UnsignedSerializableClosure')) {
+            /** @var \Laravel\SerializableClosure\UnsignedSerializableClosure $closure */
+            $closure = unserialize($uses);
+
+            $this->actionReflection = new ReflectionFunction($closure->getClosure());
+        }
+
+        if (is_string($uses) && Str::contains($uses, '@')) {
             [$class, $method] = explode('@', $uses);
             $classReflection        = new ReflectionClass($class);
             $this->actionReflection = $classReflection->getMethod($method);
